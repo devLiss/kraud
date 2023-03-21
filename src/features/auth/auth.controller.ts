@@ -49,7 +49,6 @@ export class AuthController {
   @HttpCode(200)
   async refresh(
     @RefreshToken() refreshToken: string,
-    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const tokens = await this.service.refreshToken(refreshToken);

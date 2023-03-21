@@ -7,8 +7,9 @@ import { User } from '../user/user.entity';
 import { JwtService } from './jwt.service';
 
 @Module({
+  imports: [UserModule, SequelizeModule.forFeature([User])],
   controllers: [AuthController],
   providers: [AuthService, JwtService],
-  imports: [UserModule, SequelizeModule.forFeature([User])],
+  exports: [JwtService],
 })
 export class AuthModule {}

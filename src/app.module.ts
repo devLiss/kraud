@@ -8,7 +8,7 @@ import { CityModule } from './features/city/city.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './features/user/user.entity';
-import { Country } from './features/city/city.entity';
+import { City } from './features/city/city.entity';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { Country } from './features/city/city.entity';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        models: [User, Country],
+        models: [User, City],
         autoLoadModels: true,
         synchronize: true,
       }),

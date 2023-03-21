@@ -6,10 +6,7 @@ import { CityRepository } from '../city/city.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private cityRepo: CityRepository,
-    private userRepo: UserRepository,
-  ) {}
+  constructor(private userRepo: UserRepository) {}
 
   async getAll(pagination: PaginationDto) {
     return this.userRepo.getAll(pagination);

@@ -16,6 +16,6 @@ export class CheckCityValidator implements ValidatorConstraintInterface {
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
     const city = await this.cityRepo.getByName(value);
-    return city;
+    return !!city;
   }
 }

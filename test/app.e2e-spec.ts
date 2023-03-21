@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
 import { CreateUserDto } from '../src/features/dto/createUser.dto';
 import { createAppHelper } from '../src/common/helpers/createApp.helper';
-import { LoginDto } from '../src/features/dto/login.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -59,7 +58,6 @@ describe('AppController (e2e)', () => {
     };
     const res = await request(server).post('/auth/registration').send(user);
     expect(res.status).toBe(400);
-    //expect.setState({ user });
   });
   it('/user after registr (GET)', async () => {
     const res = await request(server).get('/user');
