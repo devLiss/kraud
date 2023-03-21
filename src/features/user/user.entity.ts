@@ -6,12 +6,12 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Country } from '../country/country.entity';
+import { City } from '../city/city.entity';
 
 @Table({ tableName: 'users' })
 export class User extends Model<User> {
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     unique: true,
     autoIncrement: true,
     primaryKey: true,
@@ -24,7 +24,7 @@ export class User extends Model<User> {
   @Column({ type: DataType.DATE })
   birthDay: Date;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, unique: true })
   email: string;
 
   @Column({ type: DataType.STRING })
@@ -33,9 +33,9 @@ export class User extends Model<User> {
   @Column({ type: DataType.STRING })
   passwordSalt: string;
 
-  @ForeignKey(() => Country)
-  countryId: number;
+  @ForeignKey(() => City)
+  city: string;
 
-  @BelongsTo(() => Country, 'countryId')
-  country: Country;
+  @BelongsTo(() => City, 'city')
+  cityObj: City;
 }

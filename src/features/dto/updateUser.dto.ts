@@ -4,22 +4,23 @@ import {
   IsOptional,
   IsString,
   Length,
+  Validate,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { OmitType } from '@nestjs/swagger';
+import { CreateUserDto } from './createUser.dto';
+import { CheckCityValidator } from '../../common/validators/checkCity.validator';
 
-export class UpdateUserDto {
-  @Length(3, 10)
-  @IsString()
-  name: string;
-
+export class UpdateUserDto extends OmitType(CreateUserDto, ['password']) {
+  @IsOptional()
   @Length(8, 15)
   @IsString()
-  @IsOptional()
   password: string;
 
-  @Transform(({ value }) => parseInt(value))
   @IsOptional()
-  countryId: number;
+  @IsString()
+  @Validate(CheckCityValidator)
+  city: string;
 
   @IsNotEmpty()
   @Transform(({ value }) => new Date(value))
