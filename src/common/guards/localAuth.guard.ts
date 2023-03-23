@@ -5,14 +5,14 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { LoginDto } from '../../features/dto/login.dto';
-import { JwtService } from '../../features/auth/jwt.service';
+import { JwtCustomService } from '../../features/auth/jwtCustom.service';
 import { UserRepository } from '../../features/user/user.repository';
 
 @Injectable()
 export class LocalAuthGuard implements CanActivate {
   constructor(
     private userRepo: UserRepository,
-    private jwtService: JwtService,
+    private jwtService: JwtCustomService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest();

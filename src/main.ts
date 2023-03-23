@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { createAppHelper } from './common/helpers/createApp.helper';
-import { useContainer } from 'class-validator';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -11,7 +10,7 @@ async function bootstrap() {
     .setTitle('Kraud test task')
     .setDescription('')
     .setVersion('1.0')
-    .addTag('kraud')
+    .addTag('')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

@@ -3,13 +3,13 @@ import { CreateUserDto } from '../dto/createUser.dto';
 import { UserRepository } from '../user/user.repository';
 import * as bcrypt from 'bcrypt';
 import { UserType } from '../../common/types/user.type';
-import { JwtService } from './jwt.service';
+import { JwtCustomService } from './jwtCustom.service';
 import { LoginDto } from '../dto/login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
+    private jwtService: JwtCustomService,
     private userRepository: UserRepository,
   ) {}
 
@@ -18,6 +18,7 @@ export class AuthService {
     if (existedUser) {
       throw new BadRequestException({
         message: 'Пользователь с таким email уже существует',
+        field: 'email',
       });
     }
 

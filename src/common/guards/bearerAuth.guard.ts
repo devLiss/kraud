@@ -5,13 +5,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserRepository } from '../../features/user/user.repository';
-import { JwtService } from '../../features/auth/jwt.service';
+import { JwtCustomService } from '../../features/auth/jwtCustom.service';
 
 @Injectable()
 export class BearerAuthGuard implements CanActivate {
   constructor(
     private userRepo: UserRepository,
-    private jwtService: JwtService,
+    private jwtService: JwtCustomService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest();

@@ -12,15 +12,29 @@ import { CreateUserDto } from '../dto/createUser.dto';
 import { AuthService } from './auth.service';
 import { LoginDto } from '../dto/login.dto';
 import { User } from '../../common/decorators/user.decorator';
-import { BearerAuthGuard } from '../../common/guards/bearerAuth.guard';
 import { Response } from 'express';
 import { RefreshToken } from '../../common/decorators/cookie.decorator';
-import { JwtService } from './jwt.service';
+import { JwtCustomService } from './jwtCustom.service';
 import { LocalAuthGuard } from '../../common/guards/localAuth.guard';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LoginView } from '../viewModels/login.view';
+import { ApiErrorsResultView } from '../viewModels/ApiErrorsResult.view';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private service: AuthService, private jwtService: JwtService) {}
+  constructor(
+    private service: AuthService,
+    private jwtService: JwtCustomService,
+  ) {}
+
+  @ApiOperation({ summary: 'Try login user to system' })
+  @ApiResponse({ status: 200, description: '' })
+  @ApiResponse({ status: 400, description: '', type: ApiErrorsResultView })
+  @ApiResponse({
+    status: 401,
+    description: 'If the password or login is wrong',
+  })
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
@@ -28,7 +42,8 @@ export class AuthController {
     @Body() dto: LoginDto,
     @User() user,
   ) {
-    const tokens = await this.service.login(user);
+    console.log(user);
+    const tokens = await this.service.login(user.id);
     if (!tokens) {
       throw new UnauthorizedException();
     }
@@ -40,11 +55,28 @@ export class AuthController {
     return { accessToken: tokens.accessToken };
   }
 
+  @ApiOperation({ summary: 'Registration' })
+  @ApiResponse({ status: 201, description: '' })
+  @ApiResponse({ status: 400, description: '' })
   @Post('registration')
   registration(@Body() dto: CreateUserDto) {
     return this.service.registration(dto);
   }
 
+  @ApiOperation({
+    summary:
+      'Generate new pair of access and refresh tokens (in cookie client must send correct refreshToken) ',
+  })
+  @ApiResponse({
+    status: 200,
+    description: `Returns JWT accessToken (expired after 10 seconds) in 
+  body and JWT refreshToken in cookie (http-only, secure) (expired after 20 seconds).`,
+    type: LoginView,
+  })
+  @ApiResponse({
+    status: 401,
+    description: `If the JWT refreshToken inside cookie is missing, expired or incorrect`,
+  })
   @Post('refresh-token')
   @HttpCode(200)
   async refresh(
@@ -64,6 +96,9 @@ export class AuthController {
     };
   }
 
+  @ApiOperation({ summary: 'Logout and clear cookies' })
+  @ApiResponse({ status: 204, description: '' })
+  @ApiResponse({ status: 401, description: '' })
   @Post('logout')
   @HttpCode(204)
   async logout(

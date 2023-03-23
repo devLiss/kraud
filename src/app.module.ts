@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './features/user/user.module';
-import { AuthController } from './features/auth/auth.controller';
 import { AuthModule } from './features/auth/auth.module';
 import { CityModule } from './features/city/city.module';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -12,9 +11,9 @@ import { City } from './features/city/city.entity';
 
 @Module({
   imports: [
-    UserModule,
     AuthModule,
     CityModule,
+    UserModule,
     ConfigModule.forRoot({ isGlobal: true, envFilePath: './.env' }),
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
@@ -22,7 +21,7 @@ import { City } from './features/city/city.entity';
       useFactory: (configService: ConfigService) => ({
         dialect: 'postgres',
         host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
+        //port: configService.get('DB_PORT'),
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),

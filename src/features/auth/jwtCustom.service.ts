@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class JwtService {
+export class JwtCustomService {
   private secret;
   private refreshSecret;
   constructor(private configService: ConfigService) {

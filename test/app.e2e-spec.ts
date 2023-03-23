@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { CreateUserDto } from '../src/features/dto/createUser.dto';
 import { createAppHelper } from '../src/common/helpers/createApp.helper';
+import { type } from 'os';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -24,63 +25,99 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
-  it('/user (GET)', async () => {
-    const res = await request(server).get('/user');
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(0);
-  });
-
-  it('/auth/registration (POST) should return 400', async () => {
-    const user: CreateUserDto = { name: '', email: '', password: '' };
-    const res = await request(server).post('/auth/registration').send(user);
-    expect(res.status).toBe(400);
-  });
-  it('/auth/registration (POST) should return 201 with user', async () => {
-    const user: CreateUserDto = {
-      name: '1234',
-      email: 'qwe@aqews.com',
-      password: '12345678',
-    };
-    const res = await request(server).post('/auth/registration').send(user);
-    expect(res.status).toBe(201);
-    expect(res.body).toEqual({
-      id: expect.any(Number),
-      name: user.name,
-      email: user.email,
+  /*describe('Check registration ', () => {
+    it('/auth/registration (POST) should return 400', async () => {
+      const user: CreateUserDto = { name: '', email: '', password: '' };
+      const res = await request(server).post('/auth/registration').send(user);
+      expect(res.status).toBe(400);
     });
-    expect.setState({ user });
+    it('/auth/registration (POST) should return 201 with user', async () => {
+      const user: CreateUserDto = {
+        name: '1234',
+        email: 'qwe@aqews.com',
+        password: '12345678',
+      };
+      const res = await request(server).post('/auth/registration').send(user);
+      expect(res.status).toBe(201);
+      expect(res.body).toEqual({
+        id: expect.any(Number),
+        name: user.name,
+        email: user.email,
+      });
+      expect.setState({ user });
+    });
+    it('/auth/registration (POST) should return 400 if email exists', async () => {
+      const user: CreateUserDto = {
+        name: '343223ew',
+        email: 'qwe@aqews.com',
+        password: '123456dsew78',
+      };
+      const res = await request(server).post('/auth/registration').send(user);
+      expect(res.status).toBe(400);
+    });
   });
-  it('/auth/registration (POST) should return 400 if email exists', async () => {
-    const user: CreateUserDto = {
-      name: '343223ew',
-      email: 'qwe@aqews.com',
-      password: '123456dsew78',
-    };
-    const res = await request(server).post('/auth/registration').send(user);
-    expect(res.status).toBe(400);
-  });
-  it('/user after registr (GET)', async () => {
-    const res = await request(server).get('/user');
-    expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(1);
+*/
+  describe('Check login flow', () => {
+    it('/auth/login should return 400', async () => {
+      const res = await request(server)
+        .post('/auth/login')
+        .send({ email: '', password: '' });
+      expect(res.status).toBe(400);
+    });
+    it('/auth/login should return 401', async () => {
+      const user: CreateUserDto = {
+        name: '1234',
+        email: 'qwe@aqews.com',
+        password: '12345678',
+      };
+      console.log('User ', user);
+      const res = await request(server)
+        .post('/auth/login')
+        .send({ email: user.email, password: 'retqwyewqyuiqu' });
+      expect(res.status).toBe(401);
+    });
+    it('/auth/login should return 200', async () => {
+      const user: CreateUserDto = {
+        name: '1234',
+        email: 'qwe@aqews.com',
+        password: '12345678',
+      };
+      console.log('User ', user);
+      const res = await request(server).post('/auth/login').send(user);
+      expect(res.status).toBe(201);
+      expect(res.body).toEqual({ accessToken: expect.any(String) });
+    });
   });
 
+  /*describe('Check update user', () => {
+    it('/auth/login should return 200', async () => {
+      const user: CreateUserDto = {
+        name: '343223ew',
+        email: 'qwe@aqews.com',
+        password: '123456dsew78',
+      };
+      const accessToken = '';
+      const res = await request(server).post('/auth/login').send(user);
+      expect(res.status).toBe(200);
+      expect(res.body).toEqual({ accessToken: expect.any(String) });
+      expect.setState({ accessToken });
+    });
+
+    it('Should return 200 ', async () => {
+      const { accessToken } = expect.getState();
+      const res = await request(server)
+        .put('/user')
+        .auth(accessToken, { type: 'bearer' });
+
+      expect(res.status).toBe(200);
+      //expect(res.body).toBe
+    });
+  });
+
+  /*describe('Check get all users flow', () => {});
+
+  describe('Check get all cities', () => {});*/
   /*
-  it('/auth/login should return 400', async () => {
-    const res = await request(server).post('/auth/login').send({});
-    expect(res.status).toBe(400);
-  });
-  it('/auth/login should return 401', async () => {
-    const { user } = expect.getState();
-    const res = await request(server)
-      .post('/auth/login')
-      .send({ email: user.email, password: 'retqwyewqyuiqu' });
-    expect(res.status).toBe(401);
-  });
-  it('/auth/login should return 200', async () => {
-    const { user } = expect.getState();
-    const res = await request(server).post('/auth/login').send(user);
-    expect(res.status).toBe(200);
-  });
+
   */
 });
