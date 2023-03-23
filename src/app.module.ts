@@ -23,7 +23,7 @@ import { CitySeeder } from './city.seeder';
       useFactory: (configService: ConfigService) => ({
         dialect: 'postgres',
         host: configService.get('DB_HOST'),
-        //port: configService.get('DB_PORT'),
+        port: configService.get('DB_PORT'),
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
@@ -33,7 +33,6 @@ import { CitySeeder } from './city.seeder';
       }),
     }),
     SeederModule.forRoot({
-      // Activate this if you want to run the seeders if the table is empty in the database
       runOnlyIfTableIsEmpty: true,
     }),
     SeederModule.forFeature([CitySeeder]),

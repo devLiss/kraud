@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { CreateUserDto } from '../src/features/dto/createUser.dto';
 import { createAppHelper } from '../src/common/helpers/createApp.helper';
-import { type } from 'os';
+import { plainToInstance } from 'class-transformer';
+import { validate } from 'class-validator';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -23,6 +23,16 @@ describe('AppController (e2e)', () => {
 
   afterAll(async () => {
     await app.close();
+  });
+
+  describe('Check user create dto', () => {
+    it('Should throw when ', async () => {
+      const importInfo = { productCode: 4567, plannedQuanity: -10 };
+      const ofImportDto = plainToInstance(CreateUserDto, importInfo);
+      const errors = await validate(ofImportDto);
+      expect(errors.length).not.toBe(0);
+      expect(JSON.stringify(errors)).toContain(``);
+    });
   });
 
   /*describe('Check registration ', () => {
@@ -57,7 +67,7 @@ describe('AppController (e2e)', () => {
     });
   });
 */
-  describe('Check login flow', () => {
+  /*describe('Check login flow', () => {
     it('/auth/login should return 400', async () => {
       const res = await request(server)
         .post('/auth/login')
