@@ -399,6 +399,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.36.0.tgz#9837f768c03a1e4a30bd304a64fb8844f0e72efe"
   integrity sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==
 
+"@faker-js/faker@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
+  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
+
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.8.tgz#03595ac2075a4dc0f191cc2131de14fbd7d410b9"
@@ -850,11 +855,6 @@
     chalk "^4.1.0"
     consola "^2.15.0"
     node-fetch "^2.6.1"
-
-"@phc/format@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@phc/format/-/format-1.0.0.tgz#b5627003b3216dc4362125b13f48a4daa76680e4"
-  integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.24"
@@ -1506,15 +1506,6 @@ arg@^4.1.0:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"
   integrity sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==
-
-argon2@^0.30.3:
-  version "0.30.3"
-  resolved "https://registry.yarnpkg.com/argon2/-/argon2-0.30.3.tgz#795ca57acad76fc67dd5695732662a03018b84ed"
-  integrity sha512-DoH/kv8c9127ueJSBxAVJXinW9+EuPA3EMUxoV2sAY1qDE5H9BjTyVF/aD2XyHqbqUWabgBkIfcP3ZZuGhbJdg==
-  dependencies:
-    "@mapbox/node-pre-gyp" "^1.0.10"
-    "@phc/format" "^1.0.0"
-    node-addon-api "^5.0.0"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -2496,6 +2487,11 @@ external-editor@^3.0.3:
     iconv-lite "^0.4.24"
     tmp "^0.0.33"
 
+faker@^6.6.6:
+  version "6.6.6"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-6.6.6.tgz#e9529da0109dca4c7c5dbfeaadbd9234af943033"
+  integrity sha512-9tCqYEDHI5RYFQigXFwF1hnCwcWCOJl/hmll0lr5D2Ljjb0o4wphb69wikeJDz5qCEzXCoPvG6ss5SDP6IfOdg==
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -2635,6 +2631,13 @@ form-data@^4.0.0:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
+
+format-fast@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/format-fast/-/format-fast-1.0.2.tgz#85402b3f8c3f4980602382aef96e7d362cd0744e"
+  integrity sha512-Ywf8+KIfPlM/cB8gWHMyx6MMhmTZtfwn3WJpXy3L84FrXJKGZMT8rjAj25NrGj34X8pAbFpNzTGyI3YIQJ+ZXg==
+  dependencies:
+    is-all-utils "^1.0.6"
 
 formidable@^2.1.2:
   version "2.1.2"
@@ -3003,6 +3006,11 @@ inquirer@8.2.5:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+  integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
+
 interpret@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
@@ -3012,6 +3020,11 @@ ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+
+is-all-utils@^1.0.3, is-all-utils@^1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/is-all-utils/-/is-all-utils-1.0.7.tgz#c3d96e462541523855f1346321d6b5738644675c"
+  integrity sha512-URcVdNTd0hBKe8PapjRWbkqqIapV2WohKDnldOIM+ajpfRqGsfIY/4TCSZAsoIegtl0mU6XN1BO5hHC0Y1eK4A==
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -3746,6 +3759,13 @@ merge-descriptors@1.0.1:
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
   integrity sha512-cCi6g3/Zr1iqQi6ySbseM1Xvooa98N0w31jzUYrXPX2xqObmFGHJ0tQ5u74H3mVh7wLouTseZyYIq39g8cNp1w==
 
+merge-options-default@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/merge-options-default/-/merge-options-default-1.0.2.tgz#cf9a8a6dca8af06e119a26ad09bb341fad9f447b"
+  integrity sha512-34dbkKCRDFIHJsV/ym4OfTylW5CQ23+wamcF9qUmNebFUklex9CGEwDrhsXrVFHVQe1KGcaX9QJMfs7fvIV9wA==
+  dependencies:
+    is-all-utils "^1.0.3"
+
 merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
@@ -3911,6 +3931,15 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+nestjs-sequelize-seeder@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/nestjs-sequelize-seeder/-/nestjs-sequelize-seeder-1.1.4.tgz#3e92fecc6d2b11f0169a27ab96760a1a6688167c"
+  integrity sha512-EstDY0lLjqROXE2E3ko5LxdZmxMW+sZ4V0Dlnleh5V6NdHprG54eP42IN+CKlJfkEFSRY8X1fOFYLSAlx2tXRg==
+  dependencies:
+    format-fast "^1.0.1"
+    is-all-utils "^1.0.3"
+    merge-options-default "^1.0.2"
 
 node-abort-controller@^3.0.1:
   version "3.1.1"

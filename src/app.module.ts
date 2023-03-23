@@ -8,6 +8,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './features/user/user.entity';
 import { City } from './features/city/city.entity';
+import { SeederModule } from 'nestjs-sequelize-seeder';
+import { CitySeeder } from './city.seeder';
 
 @Module({
   imports: [
@@ -30,6 +32,11 @@ import { City } from './features/city/city.entity';
         synchronize: true,
       }),
     }),
+    SeederModule.forRoot({
+      // Activate this if you want to run the seeders if the table is empty in the database
+      runOnlyIfTableIsEmpty: true,
+    }),
+    SeederModule.forFeature([CitySeeder]),
   ],
   controllers: [AppController],
   providers: [AppService],
