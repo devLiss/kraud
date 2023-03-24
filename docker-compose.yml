@@ -21,11 +21,11 @@ services:
       - .env
     ports:
       - "5000:5000"
-    container_name: nest-kraud
+    container_name: nest-kraud-1
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: yarn start:dev service
+    command: yarn start:dev
     depends_on:
       - db
   pgadmin:
