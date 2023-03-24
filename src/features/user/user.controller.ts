@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Put,
   Query,
@@ -48,6 +50,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Update user' })
   @ApiBearerAuth()
+  @HttpCode(204)
   @Put()
   update(@Body() uuDto: UpdateUserDto, @User() user) {
     return this.service.update(uuDto, user.id);

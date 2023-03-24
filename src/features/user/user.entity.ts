@@ -34,6 +34,7 @@ export class User extends Model<User> {
   passwordSalt: string;
 
   @ForeignKey(() => City)
+  @Column({ onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
   city: string;
 
   @BelongsTo(() => City, 'city')

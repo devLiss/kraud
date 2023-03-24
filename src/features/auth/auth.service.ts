@@ -16,10 +16,12 @@ export class AuthService {
   async registration(dto: CreateUserDto) {
     const existedUser = await this.userRepository.getByEmail(dto.email);
     if (existedUser) {
-      throw new BadRequestException({
-        message: 'Пользователь с таким email уже существует',
-        field: 'email',
-      });
+      throw new BadRequestException([
+        {
+          message: 'Пользователь с таким email уже существует',
+          field: 'email',
+        },
+      ]);
     }
 
     const passwd: string = await bcrypt.genSalt();

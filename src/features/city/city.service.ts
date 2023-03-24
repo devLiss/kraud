@@ -6,7 +6,14 @@ import { PaginationDto } from '../dto/pagination.dto';
 export class CityService {
   constructor(private repo: CityRepository) {}
 
-  getAll(pagination: PaginationDto) {
-    return this.repo.getAll(pagination);
+  async getAll(pagination: PaginationDto) {
+    const { count, rows } = await this.repo.getAll(pagination);
+    return {
+      pagesCount: Math.ceil(+count / pagination.pageSize),
+      page: pagination.pageNum,
+      pageSize: pagination.pageSize,
+      total: count,
+      items: rows,
+    };
   }
 }

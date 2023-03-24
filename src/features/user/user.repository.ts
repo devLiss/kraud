@@ -33,7 +33,11 @@ export class UserRepository {
 
   async getAll(pagination: PaginationDto) {
     const offset = (pagination.pageNum - 1) * pagination.pageSize;
-    return User.findAll({ limit: pagination.pageSize, offset: offset });
+    return User.findAndCountAll({
+      limit: pagination.pageSize,
+      offset: offset,
+      attributes: ['id', 'name', 'birthDay', 'email', 'city'],
+    });
   }
 
   async getUserById(id: number) {

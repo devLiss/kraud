@@ -11,9 +11,10 @@ export class CityRepository {
   }
   async getAll(pagination: PaginationDto) {
     const offset = (pagination.pageNum - 1) * pagination.pageSize;
-    return City.findAll({
+    return City.findAndCountAll({
       limit: pagination.pageSize,
       offset: offset,
+      attributes: ['id', 'name'],
     });
   }
 }

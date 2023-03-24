@@ -9,7 +9,14 @@ export class UserService {
   constructor(private userRepo: UserRepository) {}
 
   async getAll(pagination: PaginationDto) {
-    return this.userRepo.getAll(pagination);
+    const { count, rows } = await this.userRepo.getAll(pagination);
+    return {
+      pagesCount: Math.ceil(+count / pagination.pageSize),
+      page: pagination.pageNum,
+      pageSize: pagination.pageSize,
+      total: count,
+      items: rows,
+    };
   }
 
   async update(uuDto: UpdateUserDto, id: number) {
