@@ -15,7 +15,13 @@ export class CheckCityValidator implements ValidatorConstraintInterface {
     value: any,
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
+    console.log(value);
+    console.log(this.cityRepo);
     const city = await this.cityRepo.getByName(value);
     return !!city;
+  }
+
+  defaultMessage(validationArguments?: ValidationArguments): string {
+    return 'There is no selected city in list';
   }
 }

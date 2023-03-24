@@ -10,6 +10,7 @@ import { User } from './features/user/user.entity';
 import { City } from './features/city/city.entity';
 import { SeederModule } from 'nestjs-sequelize-seeder';
 import { CitySeeder } from './city.seeder';
+import { CheckCityValidator } from './common/validators/checkCity.validator';
 
 @Module({
   imports: [

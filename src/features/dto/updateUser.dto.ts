@@ -16,19 +16,18 @@ export class UpdateUserDto extends OmitType(CreateUserDto, [
   'password',
 ]) {
   @ApiProperty({ minLength: 8, maxLength: 15, required: false })
-  @IsOptional()
   @Length(8, 15)
   @IsString()
+  @IsOptional()
   password: string;
 
   @ApiProperty({ required: false })
-  @IsOptional()
   @IsString()
   @Validate(CheckCityValidator)
+  @IsOptional()
   city: string;
 
   @ApiProperty({ required: true })
-  @IsNotEmpty()
   @Transform(({ value }) => new Date(value))
   @IsDate()
   birthDay: Date;

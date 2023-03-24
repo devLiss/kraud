@@ -33,8 +33,12 @@ export class AuthService {
     return this.userRepository.create(user);
   }
 
-  async login(userId: number) {
-    const tokens = await this.jwtService.generateTokens(userId);
+  async login(dto: LoginDto) {
+    const user = await this.userRepository.getByEmail(dto.email);
+    if (!user) {
+      return null;
+    }
+    const tokens = await this.jwtService.generateTokens(user.id);
 
     if (!tokens) {
       return null;

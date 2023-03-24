@@ -35,15 +35,13 @@ export class AuthController {
     status: 401,
     description: 'If the password or login is wrong',
   })
-  @UseGuards(LocalAuthGuard)
+  //@UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
     @Res({ passthrough: true }) res: Response,
     @Body() dto: LoginDto,
-    @User() user,
   ) {
-    console.log(user);
-    const tokens = await this.service.login(user.id);
+    const tokens = await this.service.login(dto);
     if (!tokens) {
       throw new UnauthorizedException();
     }

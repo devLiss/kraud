@@ -6,6 +6,7 @@ export class CityRepository {
   constructor(@InjectModel(City) private countryRepository: typeof City) {}
 
   async getByName(name: string) {
+    console.log('NAME ', name);
     return City.findOne({ where: { name: name } });
   }
   async getAll(pagination: PaginationDto) {

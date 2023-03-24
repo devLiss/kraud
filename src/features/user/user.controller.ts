@@ -21,6 +21,7 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
+import { User } from '../../common/decorators/user.decorator';
 
 @ApiTags('User')
 @UseGuards(BearerAuthGuard)
@@ -47,8 +48,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Update user' })
   @ApiBearerAuth()
-  @Put(':id')
-  update(@Body() uuDto: UpdateUserDto, @Param() id: number) {
-    return this.service.update(uuDto, id);
+  @Put()
+  update(@Body() uuDto: UpdateUserDto, @User() user) {
+    return this.service.update(uuDto, user.id);
   }
 }
