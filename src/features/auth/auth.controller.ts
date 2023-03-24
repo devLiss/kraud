@@ -30,12 +30,15 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Try login user to system' })
   @ApiResponse({ status: 200, description: '' })
-  @ApiResponse({ status: 400, description: '', type: ApiErrorsResultView })
+  @ApiResponse({
+    status: 400,
+    description: 'If the inputModel has incorrect values',
+    type: ApiErrorsResultView,
+  })
   @ApiResponse({
     status: 401,
     description: 'If the password or login is wrong',
   })
-  //@UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
     @Res({ passthrough: true }) res: Response,
@@ -54,8 +57,12 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Registration' })
-  @ApiResponse({ status: 201, description: '' })
-  @ApiResponse({ status: 400, description: '' })
+  @ApiResponse({ status: 201, description: 'Input data is accepted.' })
+  @ApiResponse({
+    status: 400,
+    description: 'If the inputModel has incorrect values',
+    type: ApiErrorsResultView,
+  })
   @Post('registration')
   registration(@Body() dto: CreateUserDto) {
     return this.service.registration(dto);
@@ -95,8 +102,12 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Logout and clear cookies' })
-  @ApiResponse({ status: 204, description: '' })
-  @ApiResponse({ status: 401, description: '' })
+  @ApiResponse({ status: 204, description: 'No content' })
+  @ApiResponse({
+    status: 401,
+    description:
+      'If the JWT refreshToken inside cookie is missing, expired or incorrect',
+  })
   @Post('logout')
   @HttpCode(204)
   async logout(

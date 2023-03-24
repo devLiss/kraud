@@ -3,8 +3,6 @@ import {
   Controller,
   Get,
   HttpCode,
-  HttpStatus,
-  Param,
   Put,
   Query,
   UseGuards,
@@ -15,15 +13,13 @@ import { BearerAuthGuard } from '../../common/guards/bearerAuth.guard';
 import { UpdateUserDto } from '../dto/updateUser.dto';
 import {
   ApiBearerAuth,
-  ApiExtraModels,
   ApiOperation,
   ApiParam,
-  ApiQuery,
   ApiResponse,
   ApiTags,
-  getSchemaPath,
 } from '@nestjs/swagger';
 import { User } from '../../common/decorators/user.decorator';
+import { AllUsersView } from '../viewModels/allUsers.view';
 
 @ApiTags('User')
 @UseGuards(BearerAuthGuard)
@@ -38,10 +34,13 @@ export class UserController {
   })
   @ApiResponse({
     status: 200,
+    type: AllUsersView,
+    description: 'Success',
   })
   @ApiBearerAuth()
   @ApiResponse({
     status: 401,
+    description: 'Unauthorized',
   })
   @Get()
   getAll(@Query('pagination') pagination: PaginationDto) {
@@ -49,7 +48,19 @@ export class UserController {
   }
 
   @ApiOperation({ summary: 'Update user' })
-  @ApiBearerAuth()
+  @ApiResponse({
+    status: 204,
+    description: 'No content',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'If the inputModel has incorrect values',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
+  @ApiBearerAuth('JWT')
   @HttpCode(204)
   @Put()
   update(@Body() uuDto: UpdateUserDto, @User() user) {

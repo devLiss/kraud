@@ -4,6 +4,8 @@ import { AppModule } from '../src/app.module';
 import { CreateUserDto } from '../src/features/dto/createUser.dto';
 import { createAppHelper } from '../src/common/helpers/createApp.helper';
 import request from 'supertest';
+import { UserView } from '../src/features/viewModels/user.view';
+import { CityView } from '../src/features/viewModels/city.view';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let server: any;
@@ -113,7 +115,14 @@ describe('AppController (e2e)', () => {
         .get('/user')
         .auth(accessToken, { type: 'bearer' });
       expect(res.status).toBe(200);
-      //expect(res.body).toBe
+      expect(res.body).toStrictEqual({
+        pagesCount: expect.any(Number),
+        page: expect.any(Number),
+        pageSize: expect.any(Number),
+        total: expect.any(Number),
+        items: expect.any(Array<UserView>),
+      });
+      expect(res.body.items).toHaveLength(10);
     });
   });
 
@@ -179,6 +188,14 @@ describe('AppController (e2e)', () => {
         .get('/city')
         .auth(accessToken, { type: 'bearer' });
       expect(res.status).toBe(200);
+      expect(res.body).toStrictEqual({
+        pagesCount: expect.any(Number),
+        page: expect.any(Number),
+        pageSize: expect.any(Number),
+        total: expect.any(Number),
+        items: expect.any(Array<CityView>),
+      });
+      expect(res.body.items).toHaveLength(10);
     });
   });
 });
